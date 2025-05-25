@@ -1,6 +1,7 @@
 package org.example.hogwartssql111.service.impl;
 
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.hogwartssql111.exception.NotFoundException;
@@ -12,13 +13,13 @@ import org.example.hogwartssql111.service.StudentService;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
@@ -26,8 +27,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student addStudent(Student student) {
-        studentRepository.save(student);
-        return student;
+        Faculty currentFaculty = facultyService.getFacultyByName(student.getFaculty().getName());
+        student.setFaculty(currentFaculty);
+        return studentRepository.save(student);
     }
 
     @SneakyThrows
@@ -36,8 +38,7 @@ public class StudentServiceImpl implements StudentService {
         Optional<Student> currentStudent = studentRepository.findById(id);
         if (currentStudent.isPresent()) {
             student.setId(currentStudent.get().getId());
-            studentRepository.save(student);
-            return student;
+            return studentRepository.save(student);
         } else {
             return null;
         }
@@ -50,8 +51,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudent(Long id) {
-        if (studentRepository.existsById(id)) {}
-        studentRepository.deleteById(id);
+        if (studentRepository.existsById(id)) {
+            studentRepository.deleteById(id);
+        }
     }
 
     @Override
@@ -64,6 +66,7 @@ public class StudentServiceImpl implements StudentService {
         Faculty currentFaculty = facultyService.getFaculty(id);
         return currentFaculty.getStudents();
     }
+
 
 
 }

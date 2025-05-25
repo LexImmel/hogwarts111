@@ -3,9 +3,7 @@ package org.example.hogwartssql111.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -27,7 +25,7 @@ public class Faculty {
     @Column(name = "faculty_color")
     private String color;
 
-    @OneToMany(mappedBy = "faculty")
+    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Student> students;
 }
