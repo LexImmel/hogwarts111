@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-
 public class Student {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -21,7 +20,7 @@ public class Student {
     private String name;
     private  int age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty")
     private Faculty faculty;
 }

@@ -14,4 +14,6 @@ public interface FacultyService {
     void deleteFaculty(Long id);
 
     List<Faculty> getAll();
+
+    Faculty getFacultyByName(String name);
 }
