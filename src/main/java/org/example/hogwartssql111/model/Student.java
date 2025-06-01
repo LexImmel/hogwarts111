@@ -22,5 +22,6 @@ public class Student {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Faculty faculty;
 }
