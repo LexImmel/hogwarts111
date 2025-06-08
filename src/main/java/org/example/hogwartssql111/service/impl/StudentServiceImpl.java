@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -67,6 +68,12 @@ public class StudentServiceImpl implements StudentService {
         return currentFaculty.getStudents();
     }
 
+    @Override
+    public List<Student> findByAgeBetween(int minAge, int maxAge) {
+        return findByAgeBetween(minAge, maxAge).stream()
+                .filter(student -> student.getAge() >= minAge && student.getAge() <= maxAge)
+                .collect(Collectors.toList());
+    }
 
 
 }

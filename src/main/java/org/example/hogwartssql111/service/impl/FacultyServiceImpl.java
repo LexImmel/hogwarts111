@@ -3,10 +3,12 @@ package org.example.hogwartssql111.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.example.hogwartssql111.exception.NotFoundException;
 import org.example.hogwartssql111.model.Faculty;
+import org.example.hogwartssql111.model.Student;
 import org.example.hogwartssql111.repository.FacultyRepository;
 import org.example.hogwartssql111.service.FacultyService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,31 @@ public class FacultyServiceImpl implements FacultyService {
     public Faculty addFaculty(Faculty faculty) {
         facultyRepository.save(faculty);
         return faculty;
+    }
+
+    @Override
+    public Faculty findFaculty(long id) {
+        return null;
+    }
+
+    @Override
+    public Faculty editFaculty(Faculty faculty) {
+        return null;
+    }
+
+    @Override
+    public void deleteFaculty(long id) {
+
+    }
+
+    @Override
+    public Collection<Faculty> findByNameOrColor(String name, String color) {
+        return List.of();
+    }
+
+    @Override
+    public Faculty get(long facultyId) {
+        return null;
     }
 
     @Override
@@ -53,6 +80,18 @@ public class FacultyServiceImpl implements FacultyService {
 
     public Faculty getFacultyByName(String name) {
         return facultyRepository.findByName(name).orElseThrow(() -> new NotFoundException("Faculty with name " + name + " does not exist"));
+    }
+
+    @Override
+    public List<Student> getStudentByFaculty(Long Id) {
+        Faculty faculty = facultyRepository.findById(Id).orElseThrow(
+                () -> new NotFoundException("Faculty not found with id: " + Id));
+        return faculty.getStudents();
+    }
+
+    @Override
+    public List<Faculty> getFacultyByColor(String color) {
+        return List.of();
     }
 
 }
