@@ -1,7 +1,6 @@
 package org.example.hogwartssql111.service;
 
 import org.example.hogwartssql111.model.Student;
-import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
 
@@ -17,4 +16,7 @@ public interface StudentService {
     List<Student> getAll();
 
     List<Student> getStudentsByFacultyId(Long id);
+
+    List<Student> findByAgeBetween(int minAge, int maxAge);
+
 }

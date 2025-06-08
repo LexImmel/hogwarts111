@@ -24,4 +24,8 @@ public class Student {
     @JoinColumn(name = "faculty")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Faculty faculty;
+
+
+    public Student(long l, String john, int i) {
+    }
 }

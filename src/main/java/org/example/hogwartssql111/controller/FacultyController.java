@@ -3,6 +3,7 @@ package org.example.hogwartssql111.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.hogwartssql111.model.Faculty;
+import org.example.hogwartssql111.model.Student;
 import org.example.hogwartssql111.service.FacultyService;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,9 +37,21 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
     }
 
+    @GetMapping("/color/{color}")
+    public List<Faculty> getFacultyByColor(@PathVariable String color) {
+        return facultyService.getFacultyByColor(color);
+    }
+
+    @GetMapping("faculty/{id}")
+    public List<Student> getStudentByFaculty(@PathVariable(name = "id") Long id) {
+        return facultyService.getStudentByFaculty(id);
+    }
+
     @PutMapping("/all")
     public List<Faculty> getAllFaculties() {
         return facultyService.getAll();
     }
+
+
 
 }

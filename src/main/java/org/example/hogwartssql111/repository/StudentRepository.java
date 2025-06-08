@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    Object findByAgeBetween(Integer any, Integer any1);
+
+    Object findAllByAge(Integer any);
 }
