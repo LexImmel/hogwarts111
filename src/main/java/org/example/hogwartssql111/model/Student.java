@@ -3,7 +3,6 @@ package org.example.hogwartssql111.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.jpa.repository.Query;
 
 @Getter
 @Setter
@@ -21,6 +20,7 @@ public class Student {
     private String name;
     private  int age;
 
+    @Getter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -29,7 +29,6 @@ public class Student {
 
     public Student(long l, String john, int i) {
     }
-
 
 
 }

@@ -1,5 +1,6 @@
 package org.example.hogwartssql111.service;
 
+import org.example.hogwartssql111.model.Faculty;
 import org.example.hogwartssql111.model.Student;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface StudentService {
     List<Student> getAll();
 
     List<Student> getStudentsByFacultyId(Long id);
+
+    Faculty getFacultyOfStudent(Long id);
 
     List<Student> findByAgeBetween(int minAge, int maxAge);
 

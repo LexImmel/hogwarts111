@@ -68,6 +68,12 @@ public class StudentServiceImpl implements StudentService {
         return currentFaculty.getStudents();
     }
 
+    public Faculty getFacultyOfStudent(Long Id) {
+        Student student = studentRepository.findById(Id).orElseThrow(
+                () -> new NotFoundException("Student not found with id: " + Id));
+        return student.getFaculty();
+    }
+
     @Override
     public List<Student> findByAgeBetween(int minAge, int maxAge) {
         return findByAgeBetween(minAge, maxAge).stream()

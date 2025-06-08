@@ -42,7 +42,7 @@ public class FacultyController {
         return facultyService.getFacultyByColor(color);
     }
 
-    @GetMapping("faculty/{id}")
+    @GetMapping("/faculty/{id}")
     public List<Student> getStudentByFaculty(@PathVariable(name = "id") Long id) {
         return facultyService.getStudentByFaculty(id);
     }
@@ -51,6 +51,7 @@ public class FacultyController {
     public List<Faculty> getAllFaculties() {
         return facultyService.getAll();
     }
+
 
 
 
