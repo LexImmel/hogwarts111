@@ -3,6 +3,7 @@ package org.example.hogwartssql111.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.repository.Query;
 
 @Getter
 @Setter
@@ -28,4 +29,7 @@ public class Student {
 
     public Student(long l, String john, int i) {
     }
+
+
+
 }

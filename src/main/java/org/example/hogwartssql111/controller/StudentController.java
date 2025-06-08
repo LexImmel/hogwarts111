@@ -13,6 +13,7 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    private final List<StudentService> getFiveLastStudents;
 
     @PostMapping
     public Student addStudent(@RequestBody Student student) {
@@ -50,6 +51,21 @@ public class StudentController {
         return studentService.findByAgeBetween(minAge, maxAge);
     }
 
+    @GetMapping("/countStudents")
+    public void countStudents() {
+        studentService.countStudents();
+    }
+
+    @GetMapping("/getAverageAge")
+    public Student getAverageAge() {
+        return studentService.getAverageAge();
+
+    }
+    @GetMapping("/get-five-last-students")
+    public List<Student> getFiveLastStudents() {
+        return studentService.getFiveLastStudents();
+
+    }
 }
 
 

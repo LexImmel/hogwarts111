@@ -19,4 +19,9 @@ public interface StudentService {
 
     List<Student> findByAgeBetween(int minAge, int maxAge);
 
+    void countStudents();
+
+    Student getAverageAge();
+
+    List<Student> getFiveLastStudents();
 }

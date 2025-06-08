@@ -75,5 +75,18 @@ public class StudentServiceImpl implements StudentService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void countStudents() {
+        studentRepository.countStudents();
+    }
+
+    @Override
+    public Student getAverageAge() {
+        return null;
+    }
+
+    public List<Student> getFiveLastStudents() {
+        return studentRepository.getFiveLastStudents();
+    }
 
 }

@@ -1,5 +1,6 @@
 package org.example.hogwartssql111.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.example.hogwartssql111.model.Avatar;
 import org.example.hogwartssql111.service.AvatarService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collection;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,4 +34,13 @@ public class AvatarController {
     public byte[] getAvatarFromLocal(@RequestParam("studentId") Long studentId) {
         return avatarService.getAvatarFromLocal(studentId);
     }
+
+    @GetMapping("/avatar-collection")
+    @Operation(summary = "get all avatars")
+    public ResponseEntity<Collection<Avatar>> getAll(@RequestParam("page") Integer pageNumber,
+                                                     @RequestParam("size") Integer pageSize) {
+        Collection<Avatar> avatars = avatarService.getAll(pageNumber, pageSize);
+        return ResponseEntity.ok(avatars);
+    }
+
 }

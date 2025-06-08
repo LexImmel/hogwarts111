@@ -15,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class AvatarServiceImpl  implements AvatarService {
@@ -69,6 +71,11 @@ public class AvatarServiceImpl  implements AvatarService {
         } catch (IOException e) {
             throw new IllegalArgumentException(("Avatar getting error"));
         }
+    }
+
+    @Override
+    public Collection<Avatar> getAll(Integer pageNumber, Integer pageSize) {
+        return List.of();
     }
 
     private String getExtension(String originalPath) {
