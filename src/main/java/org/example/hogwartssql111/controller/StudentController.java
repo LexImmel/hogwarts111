@@ -1,6 +1,7 @@
 package org.example.hogwartssql111.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.hogwartssql111.model.Faculty;
 import org.example.hogwartssql111.model.Student;
 import org.example.hogwartssql111.service.StudentService;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,6 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
-    private final List<StudentService> getFiveLastStudents;
 
     @PostMapping
     public Student addStudent(@RequestBody Student student) {
@@ -49,6 +49,12 @@ public class StudentController {
     @GetMapping("/age-between")
     public List<Student> findByAgeBetween(@RequestParam int minAge, @RequestParam int maxAge) {
         return studentService.findByAgeBetween(minAge, maxAge);
+    }
+
+
+    @GetMapping("faculty-of-student/{id}")
+    public Faculty getFacultyOfStudent(@PathVariable(name = "id") Long id) {
+        return studentService.getFacultyOfStudent(id);
     }
 
     @GetMapping("/countStudents")

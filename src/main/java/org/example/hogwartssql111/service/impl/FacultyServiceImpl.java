@@ -85,7 +85,7 @@ public class FacultyServiceImpl implements FacultyService {
     @Override
     public List<Student> getStudentByFaculty(Long Id) {
         Faculty faculty = facultyRepository.findById(Id).orElseThrow(
-                () -> new NotFoundException("Faculty not found with id: " + Id));
+                () -> new NotFoundException("Faculty not found with student id: " + Id));
         return faculty.getStudents();
     }
 
@@ -93,5 +93,6 @@ public class FacultyServiceImpl implements FacultyService {
     public List<Faculty> getFacultyByColor(String color) {
         return List.of();
     }
+
 
 }
