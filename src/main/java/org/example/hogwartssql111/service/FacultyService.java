@@ -9,7 +9,7 @@ import java.util.List;
 public interface FacultyService {
     Faculty addFaculty(Faculty faculty);
 
-    Faculty findFaculty(long id);
+    Long findFaculty(long id);
 
     Faculty editFaculty(Faculty faculty);
 
@@ -21,7 +21,11 @@ public interface FacultyService {
 
     Faculty updateFaculty(Long id, Faculty faculty);
 
+    Faculty updateFaculty(long facultyId, Faculty faculty);
+
     Faculty getFaculty(Long id);
+
+    Faculty getFaculty(long facultyId);
 
     void deleteFaculty(Long id);
 

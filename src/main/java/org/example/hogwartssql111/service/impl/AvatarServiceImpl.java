@@ -7,6 +7,8 @@ import org.example.hogwartssql111.model.Student;
 import org.example.hogwartssql111.repository.AvatarRepository;
 import org.example.hogwartssql111.service.AvatarService;
 import org.example.hogwartssql111.service.StudentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,17 +23,20 @@ import java.util.List;
 @Service
 public class AvatarServiceImpl  implements AvatarService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AvatarServiceImpl.class);
     private final AvatarRepository avatarRepository;
     private final StudentService studentService;
     private static final String DIR_PATH = "avatars";
 
     public AvatarServiceImpl(AvatarRepository avatarRepository, StudentService studentService) {
+
         this.avatarRepository = avatarRepository;
         this.studentService = studentService;
     }
 
     @Override
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
+        logger.info("Was invoked method to upload avatar for student with id {}", studentId);
         Path path = Path.of(DIR_PATH);
         if (Files.notExists(path)) {
             Files.createDirectories(path);
@@ -57,12 +62,14 @@ public class AvatarServiceImpl  implements AvatarService {
 
     @Override
     public Avatar getAvatarFromDb(Long studentId) {
+        logger.info("Was invoked method to get avatar of a student with id {}", studentId);
         Student student = studentService.getStudent(studentId);
         return avatarRepository.findAvatarByStudent(student).orElseThrow(() -> new NotFoundException("Avatar of student" + student.getName() + " does not exist"));
     }
 
     @Override
     public byte[] getAvatarFromLocal(Long studentId) {
+        logger.info("Was invoked method to get avatar of a student with id {} from local", studentId);
         Student student = studentService.getStudent(studentId);
         Avatar avatar = avatarRepository.findAvatarByStudent(student).orElseThrow(() -> new NotFoundException("Avatar of student" + student.getName() + " does not exist"));
         String filePath = avatar.getFilePath();
@@ -75,10 +82,12 @@ public class AvatarServiceImpl  implements AvatarService {
 
     @Override
     public Collection<Avatar> getAll(Integer pageNumber, Integer pageSize) {
+        logger.info("Was invoked method to get all avatars on page {}", pageNumber);
         return List.of();
     }
 
     private String getExtension(String originalPath) {
+        logger.info("Was invoked method to get extension of avatar by path {}", originalPath);
         if (StringUtils.isNotBlank(originalPath)) {
             return originalPath.substring(originalPath.lastIndexOf(".") + 1);
         } else return null;
