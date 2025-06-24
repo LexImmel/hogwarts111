@@ -7,7 +7,9 @@ import org.example.hogwartssql111.model.Student;
 import org.example.hogwartssql111.service.FacultyService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/faculties")
@@ -49,10 +51,12 @@ public class FacultyController {
 
     @PutMapping("/all")
     public List<Faculty> getAllFaculties() {
-        return facultyService.getAll();
+        return facultyService.getAllFaculties();
     }
 
-
-
+    @GetMapping("/longestFacultyNameIs")
+    public Optional<String> getFacultyByLongestName() {
+        return facultyService.getFacultyByLongestName();
+    }
 
 }

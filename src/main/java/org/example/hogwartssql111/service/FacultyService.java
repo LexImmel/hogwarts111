@@ -5,6 +5,7 @@ import org.example.hogwartssql111.model.Student;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface FacultyService {
     Faculty addFaculty(Faculty faculty);
@@ -29,7 +30,7 @@ public interface FacultyService {
 
     void deleteFaculty(Long id);
 
-    List<Faculty> getAll();
+    List<Faculty> getAllFaculties();
 
     Faculty getFacultyByName(String name);
 
@@ -37,5 +38,7 @@ public interface FacultyService {
     List<Student> getStudentByFaculty(Long Id);
 
     List<Faculty> getFacultyByColor(String color);
+
+    Optional<String> getFacultyByLongestName();
 
 }

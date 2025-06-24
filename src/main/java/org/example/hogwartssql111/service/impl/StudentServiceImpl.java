@@ -13,6 +13,7 @@ import org.example.hogwartssql111.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.List;
@@ -99,9 +100,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getAverageAge() {
+    public double getAverageAge() {
         logger.info("Was invoked method to get average age of students");
-        return null;
+        return studentRepository.getAverageAge();
     }
 
     public List<Student> getFiveLastStudents() {
@@ -109,4 +110,20 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.getFiveLastStudents();
     }
 
+    public List<String> getAllNamesOfStudentsStartingWith(String letter) {
+        return getAll()
+                .stream()
+                .map(Student::getName)
+                .filter(name -> name.startsWith(letter))
+                .map(String::toUpperCase)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public int averageAgeOfStudents() {
+        return getAll()
+                .stream()
+                .mapToInt(Student::getAge)
+                .sum();
+    }
 }

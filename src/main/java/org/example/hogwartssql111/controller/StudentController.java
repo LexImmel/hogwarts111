@@ -7,6 +7,7 @@ import org.example.hogwartssql111.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/students")
@@ -63,7 +64,7 @@ public class StudentController {
     }
 
     @GetMapping("/getAverageAge")
-    public Student getAverageAge() {
+    public double getAverageAge() {
         return studentService.getAverageAge();
 
     }
@@ -72,6 +73,19 @@ public class StudentController {
         return studentService.getFiveLastStudents();
 
     }
+
+    @GetMapping("/getAllNamesOfStudentsStartingWith/{letter}")
+    public List<String> getAllNamesOfStudentsStartingWith(@PathVariable(name = "letter") String letter) {
+        return studentService.getAllNamesOfStudentsStartingWith(letter);
+    }
+
+    @GetMapping("/averageAgeOfStudents")
+    public int averageAgeOfStudents() {
+        return studentService.averageAgeOfStudents();
+    }
+
+
+
 }
 
 
