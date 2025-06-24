@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,7 +96,7 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<Faculty> getAll() {
+    public List<Faculty> getAllFaculties() {
         logger.info("Was invoked method to get all Faculties");
         return facultyRepository.findAll();
     }
@@ -117,6 +118,13 @@ public class FacultyServiceImpl implements FacultyService {
     public List<Faculty> getFacultyByColor(String color) {
         logger.info("Was invoked method to get faculty by color {}", color);
         return List.of();
+    }
+
+    public Optional<String> getFacultyByLongestName() {
+        return getAllFaculties()
+                .stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length));
     }
 
 

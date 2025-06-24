@@ -30,5 +30,4 @@ public class Student {
     public Student(long l, String john, int i) {
     }
 
-
 }

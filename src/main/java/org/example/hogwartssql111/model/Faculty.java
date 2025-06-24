@@ -39,4 +39,6 @@ public class Faculty {
     public IntPredicate getFacultyId() {
         return null;
     }
+
+
 }
