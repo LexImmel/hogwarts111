@@ -31,4 +31,10 @@ public interface StudentService {
     List<String> getAllNamesOfStudentsStartingWith(String letter);
 
     int averageAgeOfStudents();
+
+
+    void printParallel();
+
+    void printSynchronized();
+
 }
