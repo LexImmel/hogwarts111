@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 import java.util.Optional;
@@ -29,6 +30,7 @@ public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
     private final FacultyService facultyService;
     private static final Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
+    public final Object flag = new Object();
 
     @Override
     public Student addStudent(Student student) {
@@ -125,5 +127,46 @@ public class StudentServiceImpl implements StudentService {
                 .stream()
                 .mapToInt(Student::getAge)
                 .sum();
+    }
+
+
+    public void printParallel() {
+        logger.info("Was invoked method to print parallel students");
+        List<Student> students = studentRepository.findAll();
+
+        System.out.println("1-st student: " + students.get(0).getName());
+        System.out.println("2-nd student: " + students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println("3-rd student: " + students.get(2).getName());
+            System.out.println("4-th student: " + students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5-th student: " + students.get(4).getName());
+            System.out.println("6-th student: " + students.get(5).getName());
+        }).start();
+    }
+
+    @Override
+    public void printSynchronized() {
+        logger.info("Was invoked method to print synchronized students");
+        List<Student> students = studentRepository.findAll();
+
+        synchronized (flag) {
+
+        System.out.println("1-st student: " + students.get(0).getName());
+        System.out.println("2-nd student: " + students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println("3-rd student: " + students.get(2).getName());
+            System.out.println("4-th student: " + students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5-th student: " + students.get(4).getName());
+            System.out.println("6-th student: " + students.get(5).getName());
+        }).start();
+        }
     }
 }
